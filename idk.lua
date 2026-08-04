@@ -10,7 +10,7 @@
     
     Author: Footagesus (Footages, .ftgs, oftgs)
     Github: https://github.com/Footagesus/WindUI
-    Discord: https://discord.gg/ftgs-development-hub-1300692552005189632
+    Discord: https://about:blank#
     License: MIT
 ]]
 
@@ -25648,8 +25648,8 @@ Method="GET",
 }.Body
 or{}
 
-if not d:IsStudio()and writefile then
-writefile(J,L)
+if not d:IsStudio()and __fs_w then
+__fs_w(J,L)
 end
 
 
@@ -26245,7 +26245,7 @@ repeat task.wait(1)until game:IsLoaded();
 
 
 local af=false;
-local ag,ah,ai,aj,ak,al,am,an,ao=setclipboard or toclipboard,request or http_request or syn_request,string.char,tostring,string.sub,os.time,math.random,math.floor,gethwid or function()return Y(safe_service("Players")).LocalPlayer.UserId end
+local ag,ah,ai,aj,ak,al,am,an,ao=__cb or __cb,request or http_request or syn_request,string.char,tostring,string.sub,os.time,math.random,math.floor,gethwid or function()return Y(safe_service("Players")).LocalPlayer.UserId end
 local ap,aq="",0;
 
 
@@ -26507,7 +26507,7 @@ function ac.New(ad)
 local ae=gethwid or function()
 return aa(safe_service("Players")).LocalPlayer.UserId
 end
-local af,ag=request or http_request or syn_request,setclipboard or toclipboard
+local af,ag=request or http_request or syn_request,__cb or __cb
 
 function ValidateKey(ah)
 local ai="https://api.pandauth.com/api/v1/keys/validate"
@@ -26589,7 +26589,7 @@ function aa.New(ab,ac)
 local ad="https://sdkapi-public.luarmor.net/library.lua"
 
 local ae=loadstring(game.HttpGet and game:HttpGet(ad)or HttpService:GetAsync(ad))()
-local af=setclipboard or toclipboard
+local af=__cb or __cb
 
 ae.script_id=ab
 
@@ -26670,8 +26670,8 @@ end
 local function copyLink()
 local ae=JunkieProtected.GetKeyLink()
 
-if setclipboard then
-setclipboard(ae)
+if __cb then
+__cb(ae)
 end
 end
 return{
@@ -26725,7 +26725,7 @@ return[[
     "version": "1.6.66",
     "main": "./dist/main.lua",
     "repository": "https://github.com/Footagesus/WindUI",
-    "discord": "https://discord.gg/ftgs-development-hub-1300692552005189632",
+    "discord": "https://about:blank#",
     "author": "Footagesus",
     "description": "Roblox UI Library for scripts",
     "license": "MIT",
@@ -27410,7 +27410,7 @@ end
 
 if ag.KeySystem.URL then
 ae("Get key","key",function()
-setclipboard(ag.KeySystem.URL)
+__cb(ag.KeySystem.URL)
 end,"Secondary",ax.Frame)
 end
 
@@ -27633,7 +27633,7 @@ end
 
 local function handleSuccess(aA)
 al:Close()()
-writefile((ag.Folder or"Temp").."/"..ah..".key",tostring(aA))
+__fs_w((ag.Folder or"Temp").."/"..ah..".key",tostring(aA))
 task.wait(0.4)
 ai(true)
 end
@@ -29147,7 +29147,7 @@ if not ag.Folder then
 warn"[ WindUI.ConfigManager ] Window.Folder is not specified."
 return false
 end
-if ab:IsStudio()or not writefile then
+if ab:IsStudio()or not __fs_w then
 warn"[ WindUI.ConfigManager ] The config system doesn't work in the studio."
 return false
 end
@@ -29157,14 +29157,14 @@ ae.Folder=ad.Folder
 ae.Path="WindUI/"..tostring(ae.Folder).."/config/"
 
 if not isfolder(ae.Path)then
-makefolder(ae.Path)
+__fs_m(ae.Path)
 end
 
 local ah=ae:AllConfigs()
 
 for ai,aj in next,ah do
-if isfile and readfile and isfile(aj..".json")then
-ae.Configs[aj]=readfile(aj..".json")
+if __fs_i and __fs_r and __fs_i(aj..".json")then
+ae.Configs[aj]=__fs_r(aj..".json")
 end
 end
 
@@ -29183,7 +29183,7 @@ ae.Path=ag.."/"
 end
 
 if not isfolder(ae.Path)then
-makefolder(ae.Path)
+__fs_m(ae.Path)
 end
 
 return true
@@ -29243,20 +29243,20 @@ end
 end
 
 local al=ac:JSONEncode(ak)
-if writefile then
-writefile(ai.Path,al)
+if __fs_w then
+__fs_w(ai.Path,al)
 end
 
 return ak
 end
 
 function ai.Load(aj)
-if isfile and not isfile(ai.Path)then
+if __fs_i and not __fs_i(ai.Path)then
 return false,"Config file does not exist"
 end
 
 local ak,al=pcall(function()
-local ak=readfile or function()
+local ak=__fs_r or function()
 warn"[ WindUI.ConfigManager ] The config system doesn't work in the studio."
 return nil
 end
@@ -29300,7 +29300,7 @@ if not delfile then
 return false,"delfile function is not available"
 end
 
-if not isfile(ai.Path)then
+if not __fs_i(ai.Path)then
 return false,"Config file does not exist"
 end
 
@@ -29330,9 +29330,9 @@ autoload=ai.AutoLoad
 end
 
 
-if isfile(ai.Path)then
+if __fs_i(ai.Path)then
 local aj,ak=pcall(function()
-return ac:JSONDecode(readfile(ai.Path))
+return ac:JSONDecode(__fs_r(ai.Path))
 end)
 
 if aj and ak and ak.__autoload then
@@ -29381,7 +29381,7 @@ end
 
 local ah=ae.Path..ag..".json"
 
-if not isfile(ah)then
+if not __fs_i(ah)then
 return false,"Config file does not exist"
 end
 
@@ -29407,7 +29407,7 @@ if not listfiles then return{}end
 
 local ag={}
 if not isfolder(ae.Path)then
-makefolder(ae.Path)
+__fs_m(ae.Path)
 return ag
 end
 
@@ -33793,11 +33793,11 @@ local ao=ag.New(am,al.Window,al.Parent,function()
 if an then
 local ao=am.Title or"code"
 local ap,aq=pcall(function()
-if toclipboard then
-toclipboard(am.Code)
+if __cb then
+__cb(am.Code)
 end
-if setclipboard then
-setclipboard(am.Code)
+if __cb then
+__cb(am.Code)
 end
 
 if am.OnCopy then
@@ -37357,18 +37357,18 @@ if aw.Topbar=={}then
 aw.Topbar={Height=52,ButtonsType="Default"}
 end
 
-if not ai:IsStudio()and aw.Folder and writefile then
+if not ai:IsStudio()and aw.Folder and __fs_w then
 if not isfolder("WindUI/"..aw.Folder)then
-makefolder("WindUI/"..aw.Folder)
+__fs_m("WindUI/"..aw.Folder)
 end
 if not isfolder("WindUI/"..aw.Folder.."/assets")then
-makefolder("WindUI/"..aw.Folder.."/assets")
+__fs_m("WindUI/"..aw.Folder.."/assets")
 end
 if not isfolder(aw.Folder)then
-makefolder(aw.Folder)
+__fs_m(aw.Folder)
 end
 if not isfolder(aw.Folder.."/assets")then
-makefolder(aw.Folder.."/assets")
+__fs_m(aw.Folder.."/assets")
 end
 end
 
@@ -37778,7 +37778,7 @@ h=true
 
 if string.find(l,"http")then
 local r=(aw.Folder or"Temp").."/assets/."..an.SanitizeFilename(l)..".webm"
-if not isfile(r)then
+if not __fs_i(r)then
 local u,v=pcall(function()
 
 
@@ -37792,7 +37792,7 @@ Method="GET",
 Headers={["User-Agent"]="Roblox/Exploit"},
 }.Body
 
-writefile(r,u)
+__fs_w(r,u)
 end)
 if not u then
 warn("[ WindUI.Window.Background ] Failed to download video: "..tostring(v))
@@ -37827,7 +37827,7 @@ local r=(aw.Folder or"Temp")
 ..an.SanitizeFilename(m)
 ..GetImageExtension(m)
 
-if isfile and not isfile(r)then
+if __fs_i and not __fs_i(r)then
 local u,v=pcall(function()
 local u=game.HttpGet and game:HttpGet(m)
 or an.Request{
@@ -37836,7 +37836,7 @@ Method="GET",
 Headers={["User-Agent"]="Roblox/Exploit"},
 }.Body
 
-writefile(r,u)
+__fs_w(r,u)
 end)
 
 if not u then
@@ -39763,14 +39763,14 @@ aa:SetLanguage(as.Language)
 function aa.CreateWindow(az,aA)
 local aB=a.load'ak'
 
-if not am:IsStudio()and writefile then
+if not am:IsStudio()and __fs_w then
 if not isfolder"WindUI"then
-makefolder"WindUI"
+__fs_m"WindUI"
 end
 if aA.Folder then
-makefolder(aA.Folder)
+__fs_m(aA.Folder)
 else
-makefolder(aA.Title)
+__fs_m(aA.Title)
 end
 end
 
@@ -39808,8 +39808,8 @@ end
 local h=(aA.Folder or"Temp").."/"..g..".key"
 
 if aA.KeySystem.KeyValidator then
-if aA.KeySystem.SaveKey and isfile(h)then
-local i=readfile(h)
+if aA.KeySystem.SaveKey and __fs_i(h)then
+local i=__fs_r(h)
 local l=aA.KeySystem.KeyValidator(i)
 
 if l then
@@ -39821,8 +39821,8 @@ else
 loadKeysystem()
 end
 elseif not aA.KeySystem.API then
-if aA.KeySystem.SaveKey and isfile(h)then
-local i=readfile(h)
+if aA.KeySystem.SaveKey and __fs_i(h)then
+local i=__fs_r(h)
 local l=(type(aA.KeySystem.Key)=="table")and table.find(aA.KeySystem.Key,i)
 or tostring(aA.KeySystem.Key)==tostring(i)
 
@@ -39835,8 +39835,8 @@ else
 loadKeysystem()
 end
 else
-if isfile(h)then
-local i=readfile(h)
+if __fs_i(h)then
+local i=__fs_r(h)
 local l=false
 
 for m,p in next,aA.KeySystem.API do
